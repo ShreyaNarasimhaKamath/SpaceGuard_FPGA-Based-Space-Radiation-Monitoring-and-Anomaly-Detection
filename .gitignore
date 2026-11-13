@@ -1,0 +1,38 @@
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# NASA datasets
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Generated results
+results/plots/*
+results/evaluation/*
+
+# FPGA generated files
+*.bit
+*.bin
+*.jou
+*.log
+*.wdb
+*.dcp
+*.runs/
+*.cache/
+*.sim/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
