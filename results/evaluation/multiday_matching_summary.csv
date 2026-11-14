@@ -1,0 +1,4 @@
+date,band1_events,band2_events,matched_pairs,band1_unmatched,band2_unmatched,mean_iou
+20240101,10,10,7,3,3,0.3604723142552616
+20240102,5,6,4,1,2,0.5731133379728635
+20240103,4,5,1,3,4,0.2964623816641769

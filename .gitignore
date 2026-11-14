@@ -18,6 +18,9 @@ data/processed/*
 results/plots/*
 results/evaluation/*
 
+# Keep selected research outputs
+!results/plots/*.png
+!results/evaluation/*.csv
 # FPGA generated files
 *.bit
 *.bin
@@ -36,3 +39,4 @@ results/evaluation/*
 # OS
 .DS_Store
 Thumbs.db
+docs/dataset/HEO1_EXP_index.html
