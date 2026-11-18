@@ -1,0 +1,20 @@
+"""Plot results/wave/wave.csv (from testbench/tb_wave.v built with -DCSV_OUT): protected (TMR) vs unprotected top after one upset."""
+import pandas as pd, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
+d = pd.read_csv("../results/wave/wave.csv"); t = d["i"].values; up = int(d.loc[d.upset == 1, "i"].iloc[0])
+gold = None
+fig, ax = plt.subplots(4, 1, figsize=(12, 9), sharex=True, gridspec_kw=dict(height_ratios=[3, 1.2, 1.2, 1.2]))
+a = ax[0]; a.semilogy(t, d.x0.clip(lower=1), color="0.6", lw=0.8, label="input flux, channel 0 (fixed point)")
+a.semilogy(t, d.base_prot.clip(lower=1), color="tab:blue", lw=1.8, label="baseline, protected (TMR)")
+a.semilogy(t, d.base_bare.clip(lower=1), color="tab:red", lw=1.4, ls="--", label="baseline, unprotected")
+a.set_ylabel("flux x 256"); a.legend(loc="upper right", fontsize=8)
+a = ax[1]; a.step(t, d.alarm_prot + 0.0, color="tab:blue", lw=1.8, where="post", label="protected"); a.step(t, d.alarm_bare + 0.06, color="tab:red", lw=1.2, ls="--", where="post", label="unprotected")
+a.set_ylabel("channel-0\nalarm"); a.set_yticks([0, 1]); a.legend(loc="upper right", fontsize=8)
+a = ax[2]; a.step(t, d.mode_prot, color="tab:blue", lw=1.8, where="post"); a.step(t, d.mode_bare + 0.06, color="tab:red", lw=1.2, ls="--", where="post")
+a.set_ylabel("controller mode"); a.set_yticks([0, 1, 2]); a.set_yticklabels(["NORMAL", "ALERT", "PROTECT"])
+a = ax[3]; a.step(t, d.tmr_err, color="tab:green", lw=1.5, where="post"); a.set_ylabel("TMR error\nflag"); a.set_yticks([0, 1]); a.set_xlabel("sample (1 s each)")
+for x in ax: x.axvline(up, color="k", ls=":", lw=1)
+ax[0].annotate("one baseline bit flipped\n(one TMR copy / the only copy)", (up, ax[0].get_ylim()[1]), xytext=(up + 150, ax[0].get_ylim()[1] * 0.35), fontsize=8, arrowprops=dict(arrowstyle="->"))
+fig.suptitle("SpaceGuard RTL simulation: single upset in the detector baseline, protected vs unprotected", fontsize=11)
+fig.tight_layout(); fig.savefig("../results/wave/wave_upset.png", dpi=130); print("saved")
+d2 = d[(d.i > up - 5)]; diff = (d2.alarm_prot != d2.alarm_bare).sum(); print("samples where alarm differs after upset:", int(diff), "| mode differs:", int((d2.mode_prot != d2.mode_bare).sum()))
+print("first alarm prot/bare after upset-300:", d[(d.i>up-300)&(d.alarm_prot==1)].i.min(), d[(d.i>up-300)&(d.alarm_bare==1)].i.min(), "| err flag samples:", int(d.tmr_err.sum()))

@@ -1,0 +1,1 @@
+Yosys LUT mapping not completed (run was inconclusive); state registers by construction: simplex 66 FF, TMR 198 FF.

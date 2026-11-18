@@ -1,0 +1,5 @@
+part,variant,LUT,FF,CARRY8,BRAM,DSP,WNS_ns,period_ns,fmax_MHz_est,total_power_W,dynamic_W,static_W
+xczu7ev-ffvc1156-2-e,bare_ema,632,162,46,0,0,0.220,3.333,321.23353678124,0.601,0.010,0.592
+xczu7ev-ffvc1156-2-e,tmr_ema,2211,486,162,0,0,-0.051,3.333,295.50827423167846,0.636,0.044,0.592
+xczu7ev-ffvc1156-2-e,bare_count,257,96,10,0,0,1.459,3.333,533.6179295624332,0.598,0.006,0.592
+xczu7ev-ffvc1156-2-e,tmr_count,959,288,48,0,0,0.844,3.333,401.7677782241864,0.616,0.024,0.592

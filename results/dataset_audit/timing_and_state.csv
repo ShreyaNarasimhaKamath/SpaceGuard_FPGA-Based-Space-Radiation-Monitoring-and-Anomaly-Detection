@@ -1,0 +1,4 @@
+date,samples,non_1s_steps,missing_rows,operational_mode_rows,eclipse_rows
+20240101,86400,0,0,86400,0
+20240102,86400,0,178,86222,0
+20240103,86400,0,0,86400,0
